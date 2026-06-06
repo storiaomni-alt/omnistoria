@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OMNISTORIA QUANTUM AGI — Working Platform</title>
+<title>OMNISTORIA QUANTUM AGI � Working Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -184,18 +184,6 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
 .engine-tile .t-name{font-family:'Orbitron',monospace;font-size:0.65rem;color:#d0c8b0;letter-spacing:0.05em;}
 .engine-tile.mem .t-name{color:var(--cyan);}
 </style>
-<script>
-// Pre-loaded API keys
-(function(){
-  var keys = {
-    'omni_groq': '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',
-    'omni_eleven': 'sk_797cc00ffa5c8152e5a9effe4b096fb3dfaa8ae4bb865f53',
-    'omni_hf': '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'
-  };
-  Object.keys(keys).forEach(function(k){ 
-    if(!localStorage.getItem(k)) localStorage.setItem(k, keys[k]); 
-  });
-})();
 </script>
 </head>
 <body>
@@ -208,26 +196,26 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
   </div>
 
   <div class="sidebar-section">CREATION ENGINES</div>
-  <div class="nav-item active" onclick="showPanel('home')"><span class="nav-icon">🏠</span><span>Dashboard</span></div>
-  <div class="nav-item" onclick="showPanel('writing')"><span class="nav-icon">✍️</span><span>AI Writing</span></div>
-  <div class="nav-item" onclick="showPanel('grammar')"><span class="nav-icon">✨</span><span>Grammar & Style</span></div>
-  <div class="nav-item" onclick="showPanel('image')"><span class="nav-icon">🎨</span><span>Image Gen</span></div>
-  <div class="nav-item" onclick="showPanel('voice')"><span class="nav-icon">🔊</span><span>Voice & Audio</span></div>
-  <div class="nav-item" onclick="showPanel('video')"><span class="nav-icon">🎥</span><span>Video Gen</span></div>
-  <div class="nav-item" onclick="showPanel('book')"><span class="nav-icon">📚</span><span>Book Formatter</span></div>
-  <div class="nav-item" onclick="showPanel('cover')"><span class="nav-icon">📖</span><span>Cover Studio</span></div>
-  <div class="nav-item" onclick="showPanel('search')"><span class="nav-icon">🔍</span><span>Web Search</span></div>
-  <div class="nav-item" onclick="showPanel('email')"><span class="nav-icon">📧</span><span>Email</span></div>
+  <div class="nav-item active" onclick="showPanel('home')"><span class="nav-icon">??</span><span>Dashboard</span></div>
+  <div class="nav-item" onclick="showPanel('writing')"><span class="nav-icon">??</span><span>AI Writing</span></div>
+  <div class="nav-item" onclick="showPanel('grammar')"><span class="nav-icon">?</span><span>Grammar & Style</span></div>
+  <div class="nav-item" onclick="showPanel('image')"><span class="nav-icon">??</span><span>Image Gen</span></div>
+  <div class="nav-item" onclick="showPanel('voice')"><span class="nav-icon">??</span><span>Voice & Audio</span></div>
+  <div class="nav-item" onclick="showPanel('video')"><span class="nav-icon">??</span><span>Video Gen</span></div>
+  <div class="nav-item" onclick="showPanel('book')"><span class="nav-icon">??</span><span>Book Formatter</span></div>
+  <div class="nav-item" onclick="showPanel('cover')"><span class="nav-icon">??</span><span>Cover Studio</span></div>
+  <div class="nav-item" onclick="showPanel('search')"><span class="nav-icon">??</span><span>Web Search</span></div>
+  <div class="nav-item" onclick="showPanel('email')"><span class="nav-icon">??</span><span>Email</span></div>
 
   <div class="sidebar-section">MEMORY SUITE</div>
-  <div class="nav-item memory-item" onclick="showPanel('photos')"><span class="nav-icon">📸</span><span>Photo Upload</span></div>
-  <div class="nav-item memory-item" onclick="showPanel('memory')"><span class="nav-icon">🕰️</span><span>Memory Story</span></div>
-  <div class="nav-item memory-item" onclick="showPanel('presentation')"><span class="nav-icon">📊</span><span>Presentation</span></div>
-  <div class="nav-item memory-item" onclick="showPanel('movie')"><span class="nav-icon">🎞️</span><span>Memory Movie</span></div>
-  <div class="nav-item memory-item" onclick="showPanel('avatar')"><span class="nav-icon">🗣️</span><span>Avatar Narrator</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('photos')"><span class="nav-icon">??</span><span>Photo Upload</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('memory')"><span class="nav-icon">???</span><span>Memory Story</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('presentation')"><span class="nav-icon">??</span><span>Presentation</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('movie')"><span class="nav-icon">???</span><span>Memory Movie</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('avatar')"><span class="nav-icon">???</span><span>Avatar Narrator</span></div>
 
   <div class="sidebar-footer">
-    <button class="settings-btn" onclick="openSettings()">⚙ API SETTINGS</button>
+    <button class="settings-btn" onclick="openSettings()">? API SETTINGS</button>
   </div>
 </div>
 
@@ -235,7 +223,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
 <div class="main">
   <div class="topbar">
     <div class="topbar-title" id="topbar-title">Dashboard</div>
-    <div class="topbar-badge" id="api-status">⚠ Configure API Keys</div>
+    <div class="topbar-badge" id="api-status">? Configure API Keys</div>
   </div>
   <div class="content">
 
@@ -243,33 +231,33 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <div class="panel active" id="panel-home">
       <div class="home-hero">
         <h1>OMNISTORIA</h1>
-        <p>Your complete AI creative platform — 15 working engines powered by Groq, ElevenLabs, Hugging Face & more. Select an engine below to begin.</p>
+        <p>Your complete AI creative platform � 15 working engines powered by Groq, ElevenLabs, Hugging Face & more. Select an engine below to begin.</p>
         <div style="margin-top:1rem;">
-          <button class="btn btn-gold" onclick="openSettings()">⚙ Configure API Keys First</button>
+          <button class="btn btn-gold" onclick="openSettings()">? Configure API Keys First</button>
         </div>
       </div>
       <div class="engine-grid">
-        <div class="engine-tile" onclick="showPanel('writing')"><div class="t-icon">✍️</div><div class="t-name">AI Writing</div></div>
-        <div class="engine-tile" onclick="showPanel('grammar')"><div class="t-icon">✨</div><div class="t-name">Grammar & Style</div></div>
-        <div class="engine-tile" onclick="showPanel('image')"><div class="t-icon">🎨</div><div class="t-name">Image Gen</div></div>
-        <div class="engine-tile" onclick="showPanel('voice')"><div class="t-icon">🔊</div><div class="t-name">Voice & Audio</div></div>
-        <div class="engine-tile" onclick="showPanel('video')"><div class="t-icon">🎥</div><div class="t-name">Video Gen</div></div>
-        <div class="engine-tile" onclick="showPanel('book')"><div class="t-icon">📚</div><div class="t-name">Book Formatter</div></div>
-        <div class="engine-tile" onclick="showPanel('cover')"><div class="t-icon">📖</div><div class="t-name">Cover Studio</div></div>
-        <div class="engine-tile" onclick="showPanel('search')"><div class="t-icon">🔍</div><div class="t-name">Web Search</div></div>
-        <div class="engine-tile" onclick="showPanel('email')"><div class="t-icon">📧</div><div class="t-name">Email</div></div>
-        <div class="engine-tile mem" onclick="showPanel('photos')"><div class="t-icon">📸</div><div class="t-name">Photo Upload</div></div>
-        <div class="engine-tile mem" onclick="showPanel('memory')"><div class="t-icon">🕰️</div><div class="t-name">Memory Story</div></div>
-        <div class="engine-tile mem" onclick="showPanel('presentation')"><div class="t-icon">📊</div><div class="t-name">Presentation</div></div>
-        <div class="engine-tile mem" onclick="showPanel('movie')"><div class="t-icon">🎞️</div><div class="t-name">Memory Movie</div></div>
-        <div class="engine-tile mem" onclick="showPanel('avatar')"><div class="t-icon">🗣️</div><div class="t-name">Avatar Narrator</div></div>
+        <div class="engine-tile" onclick="showPanel('writing')"><div class="t-icon">??</div><div class="t-name">AI Writing</div></div>
+        <div class="engine-tile" onclick="showPanel('grammar')"><div class="t-icon">?</div><div class="t-name">Grammar & Style</div></div>
+        <div class="engine-tile" onclick="showPanel('image')"><div class="t-icon">??</div><div class="t-name">Image Gen</div></div>
+        <div class="engine-tile" onclick="showPanel('voice')"><div class="t-icon">??</div><div class="t-name">Voice & Audio</div></div>
+        <div class="engine-tile" onclick="showPanel('video')"><div class="t-icon">??</div><div class="t-name">Video Gen</div></div>
+        <div class="engine-tile" onclick="showPanel('book')"><div class="t-icon">??</div><div class="t-name">Book Formatter</div></div>
+        <div class="engine-tile" onclick="showPanel('cover')"><div class="t-icon">??</div><div class="t-name">Cover Studio</div></div>
+        <div class="engine-tile" onclick="showPanel('search')"><div class="t-icon">??</div><div class="t-name">Web Search</div></div>
+        <div class="engine-tile" onclick="showPanel('email')"><div class="t-icon">??</div><div class="t-name">Email</div></div>
+        <div class="engine-tile mem" onclick="showPanel('photos')"><div class="t-icon">??</div><div class="t-name">Photo Upload</div></div>
+        <div class="engine-tile mem" onclick="showPanel('memory')"><div class="t-icon">???</div><div class="t-name">Memory Story</div></div>
+        <div class="engine-tile mem" onclick="showPanel('presentation')"><div class="t-icon">??</div><div class="t-name">Presentation</div></div>
+        <div class="engine-tile mem" onclick="showPanel('movie')"><div class="t-icon">???</div><div class="t-name">Memory Movie</div></div>
+        <div class="engine-tile mem" onclick="showPanel('avatar')"><div class="t-icon">???</div><div class="t-name">Avatar Narrator</div></div>
       </div>
     </div>
 
     <!-- AI WRITING -->
     <div class="panel" id="panel-writing">
       <div class="card">
-        <div class="card-title">✍️ AI Novel Writing Engine</div>
+        <div class="card-title">?? AI Novel Writing Engine</div>
         <div class="input-group">
           <label class="input-label">Genre</label>
           <select id="wr-genre">
@@ -313,7 +301,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
         <div class="btn-row">
           <button class="btn btn-outline btn-sm" onclick="copyText('wr-output')">Copy</button>
           <button class="btn btn-outline btn-sm" onclick="downloadText('wr-output','story.txt')">Download .txt</button>
-          <button class="btn btn-outline btn-sm" onclick="sendToBook()">Send to Book Formatter →</button>
+          <button class="btn btn-outline btn-sm" onclick="sendToBook()">Send to Book Formatter ?</button>
         </div>
       </div>
     </div>
@@ -321,7 +309,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- GRAMMAR -->
     <div class="panel" id="panel-grammar">
       <div class="card">
-        <div class="card-title">✨ Grammar & Style Engine</div>
+        <div class="card-title">? Grammar & Style Engine</div>
         <div class="tabs">
           <div class="tab active" onclick="switchTab(this,'gr-tab-rewrite')">Rewrite & Fix</div>
           <div class="tab" onclick="switchTab(this,'gr-tab-tone')">Tone Shift</div>
@@ -379,7 +367,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- IMAGE GEN -->
     <div class="panel" id="panel-image">
       <div class="card">
-        <div class="card-title">🎨 AI Image Generation Engine</div>
+        <div class="card-title">?? AI Image Generation Engine</div>
         <div class="input-group">
           <label class="input-label">Image Prompt</label>
           <textarea id="img-prompt" placeholder="Describe the image you want to generate in detail..." style="min-height:80px;"></textarea>
@@ -397,9 +385,9 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
           <div class="input-group">
             <label class="input-label">Aspect Ratio</label>
             <select id="img-ratio">
-              <option value="512x512">Square (512×512)</option>
-              <option value="768x512">Landscape (768×512)</option>
-              <option value="512x768">Portrait (512×768)</option>
+              <option value="512x512">Square (512�512)</option>
+              <option value="768x512">Landscape (768�512)</option>
+              <option value="512x768">Portrait (512�768)</option>
             </select>
           </div>
         </div>
@@ -409,7 +397,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
         </div>
         <div class="btn-row">
           <button class="btn btn-gold" onclick="runImageGen()">Generate Image</button>
-          <button class="btn btn-outline btn-sm" onclick="enhancePrompt()">✨ Enhance Prompt</button>
+          <button class="btn btn-outline btn-sm" onclick="enhancePrompt()">? Enhance Prompt</button>
         </div>
         <div id="img-status" class="status"></div>
       </div>
@@ -425,7 +413,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- VOICE -->
     <div class="panel" id="panel-voice">
       <div class="card">
-        <div class="card-title">🔊 Voice & Audio Engine</div>
+        <div class="card-title">?? Voice & Audio Engine</div>
         <div class="input-group">
           <label class="input-label">Text to Convert to Speech</label>
           <textarea id="voice-text" placeholder="Enter text to convert to realistic AI voice..."></textarea>
@@ -462,9 +450,9 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- VIDEO -->
     <div class="panel" id="panel-video">
       <div class="card">
-        <div class="card-title">🎥 AI Video Generation Engine</div>
+        <div class="card-title">?? AI Video Generation Engine</div>
         <div style="background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.2);padding:1rem;margin-bottom:1rem;font-size:0.82rem;color:#a0c8d0;">
-          ℹ️ Video generation uses Runway ML API. Requires a Runway API key (runwayml.com). Due to browser CORS restrictions, this panel generates the API call — run it via a simple backend proxy or Cloudflare Worker.
+          ?? Video generation uses Runway ML API. Requires a Runway API key (runwayml.com). Due to browser CORS restrictions, this panel generates the API call � run it via a simple backend proxy or Cloudflare Worker.
         </div>
         <div class="input-group">
           <label class="input-label">Scene Description</label>
@@ -493,7 +481,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
         </div>
         <div class="btn-row">
           <button class="btn btn-gold" onclick="runVideo()">Generate API Payload</button>
-          <button class="btn btn-outline btn-sm" onclick="enhanceVideoPrompt()">✨ Enhance Prompt</button>
+          <button class="btn btn-outline btn-sm" onclick="enhanceVideoPrompt()">? Enhance Prompt</button>
         </div>
         <div id="vid-status" class="status"></div>
       </div>
@@ -509,7 +497,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- BOOK FORMATTER -->
     <div class="panel" id="panel-book">
       <div class="card">
-        <div class="card-title">📚 Book Formatter & Exporter</div>
+        <div class="card-title">?? Book Formatter & Exporter</div>
         <div class="grid-2">
           <div class="input-group">
             <label class="input-label">Book Title</label>
@@ -528,7 +516,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
           <div class="input-group">
             <label class="input-label">Trim Size</label>
             <select id="book-trim">
-              <option>6×9 (Standard)</option><option>5.5×8.5</option><option>8.5×11</option>
+              <option>6�9 (Standard)</option><option>5.5�8.5</option><option>8.5�11</option>
             </select>
           </div>
           <div class="input-group">
@@ -567,7 +555,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- COVER STUDIO -->
     <div class="panel" id="panel-cover">
       <div class="card">
-        <div class="card-title">📖 AI Cover & Logo Studio</div>
+        <div class="card-title">?? AI Cover & Logo Studio</div>
         <div class="grid-2">
           <div class="input-group">
             <label class="input-label">Book Title</label>
@@ -620,9 +608,9 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- SEARCH -->
     <div class="panel" id="panel-search">
       <div class="card">
-        <div class="card-title">🔍 Web Search Engine</div>
+        <div class="card-title">?? Web Search Engine</div>
         <div style="background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);padding:0.8rem 1rem;margin-bottom:1rem;font-size:0.8rem;color:#a0b8c0;">
-          Powered by SerpAPI (Google results). Enter your SerpAPI key in ⚙ Settings. Free tier: 100 searches/month.
+          Powered by SerpAPI (Google results). Enter your SerpAPI key in ? Settings. Free tier: 100 searches/month.
         </div>
         <div style="display:flex;gap:0.8rem;">
           <input type="text" id="search-query" placeholder="Search anything..." style="flex:1;" onkeydown="if(event.key==='Enter')runSearch()">
@@ -642,15 +630,15 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- EMAIL -->
     <div class="panel" id="panel-email">
       <div class="card">
-        <div class="card-title">📧 Email Engine</div>
+        <div class="card-title">?? Email Engine</div>
         <div class="tabs">
-          <div class="tab active" onclick="switchTab(this,'email-tab-compose')">✉ Compose</div>
-          <div class="tab" onclick="switchTab(this,'email-tab-inbox')">📥 Inbox (Mock)</div>
-          <div class="tab" onclick="switchTab(this,'email-tab-ai')">🤖 AI Draft</div>
+          <div class="tab active" onclick="switchTab(this,'email-tab-compose')">? Compose</div>
+          <div class="tab" onclick="switchTab(this,'email-tab-inbox')">?? Inbox (Mock)</div>
+          <div class="tab" onclick="switchTab(this,'email-tab-ai')">?? AI Draft</div>
         </div>
         <div class="tab-panel active" id="email-tab-compose">
           <div style="background:rgba(255,165,0,0.07);border:1px solid rgba(255,165,0,0.2);padding:0.8rem;margin-bottom:1rem;font-size:0.78rem;color:#c0a060;">
-            Uses EmailJS. Configure Service ID, Template ID, and Public Key in ⚙ Settings. Free: 200 emails/month.
+            Uses EmailJS. Configure Service ID, Template ID, and Public Key in ? Settings. Free: 200 emails/month.
           </div>
           <div class="input-group">
             <label class="input-label">To</label>
@@ -670,16 +658,16 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
           </div>
           <div class="btn-row">
             <button class="btn btn-gold" onclick="sendEmail()">Send Email</button>
-            <button class="btn btn-outline btn-sm" onclick="aiDraftEmail()">AI Draft →</button>
+            <button class="btn btn-outline btn-sm" onclick="aiDraftEmail()">AI Draft ?</button>
           </div>
           <div id="email-status" class="status"></div>
         </div>
         <div class="tab-panel" id="email-tab-inbox">
           <div id="inbox-list">
-            <div class="email-item"><div class="from">Omnistoria Team</div><div class="subject">Welcome to OMNISTORIA QUANTUM AGI — Your creative platform is ready</div><div class="time">Just now</div></div>
+            <div class="email-item"><div class="from">Omnistoria Team</div><div class="subject">Welcome to OMNISTORIA QUANTUM AGI � Your creative platform is ready</div><div class="time">Just now</div></div>
             <div class="email-item"><div class="from">Groq API</div><div class="subject">Your API key has been created successfully</div><div class="time">1h ago</div></div>
             <div class="email-item"><div class="from">ElevenLabs</div><div class="subject">Welcome! Start creating with AI voice generation</div><div class="time">2h ago</div></div>
-            <div class="email-item"><div class="from">Hugging Face</div><div class="subject">Your access token is ready — start generating images</div><div class="time">3h ago</div></div>
+            <div class="email-item"><div class="from">Hugging Face</div><div class="subject">Your access token is ready � start generating images</div><div class="time">3h ago</div></div>
           </div>
           <p style="font-size:0.78rem;color:#504840;margin-top:1rem;font-family:'Share Tech Mono',monospace;">Note: Full inbox requires IMAP/email server integration (Gmail API or IMAP). Shown above is a demo inbox.</p>
         </div>
@@ -699,7 +687,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
           <div id="email-ai-status" class="status"></div>
           <div class="output-box" id="email-ai-output" style="margin-top:1rem;">AI-drafted email will appear here...</div>
           <div class="btn-row">
-            <button class="btn btn-outline btn-sm" onclick="useAIDraft()">Use This Draft →</button>
+            <button class="btn btn-outline btn-sm" onclick="useAIDraft()">Use This Draft ?</button>
             <button class="btn btn-outline btn-sm" onclick="copyText('email-ai-output')">Copy</button>
           </div>
         </div>
@@ -709,14 +697,14 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- PHOTOS -->
     <div class="panel" id="panel-photos">
       <div class="card cyan">
-        <div class="card-title">📸 Photo Upload Engine</div>
+        <div class="card-title">?? Photo Upload Engine</div>
         <div class="upload-zone" id="photo-drop" onclick="document.getElementById('photo-input').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handlePhotoDrop(event)">
-          <div class="icon">📸</div>
-          <p>Click or drag & drop photos here<br>Supports JPG, PNG, WEBP, HEIC — upload thousands at once</p>
+          <div class="icon">??</div>
+          <p>Click or drag & drop photos here<br>Supports JPG, PNG, WEBP, HEIC � upload thousands at once</p>
         </div>
         <input type="file" id="photo-input" multiple accept="image/*" style="display:none" onchange="handlePhotoUpload(this.files)">
         <div class="btn-row" style="margin-top:1rem;">
-          <button class="btn btn-cyan btn-sm" onclick="organizePhotos()">🧠 AI Organize by Date/Person/Place</button>
+          <button class="btn btn-cyan btn-sm" onclick="organizePhotos()">?? AI Organize by Date/Person/Place</button>
           <button class="btn btn-outline btn-sm" onclick="analyzePhotos()">Analyze All Photos</button>
           <button class="btn btn-outline btn-sm" onclick="clearPhotos()">Clear</button>
         </div>
@@ -735,7 +723,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- MEMORY STORY -->
     <div class="panel" id="panel-memory">
       <div class="card cyan">
-        <div class="card-title">🕰️ Memory Story Generator</div>
+        <div class="card-title">??? Memory Story Generator</div>
         <div class="input-group">
           <label class="input-label">Who are these memories about?</label>
           <input type="text" id="mem-subject" placeholder="e.g. Our Family 2010-2024, John's Journey, The Wedding Story...">
@@ -772,7 +760,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
         <div class="btn-row">
           <button class="btn btn-outline btn-sm" onclick="copyText('mem-output')">Copy</button>
           <button class="btn btn-outline btn-sm" onclick="downloadText('mem-output','memory-story.txt')">Download</button>
-          <button class="btn btn-outline btn-sm" onclick="sendMemoryToBook()">Send to Book →</button>
+          <button class="btn btn-outline btn-sm" onclick="sendMemoryToBook()">Send to Book ?</button>
         </div>
       </div>
     </div>
@@ -780,7 +768,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- PRESENTATION -->
     <div class="panel" id="panel-presentation">
       <div class="card cyan">
-        <div class="card-title">📊 Presentation Generator</div>
+        <div class="card-title">?? Presentation Generator</div>
         <div class="input-group">
           <label class="input-label">Presentation Topic / Title</label>
           <input type="text" id="pres-title" placeholder="e.g. Our Family History 1950-2024...">
@@ -830,10 +818,10 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- MOVIE -->
     <div class="panel" id="panel-movie">
       <div class="card cyan">
-        <div class="card-title">🎞️ Memory Movie Generator</div>
+        <div class="card-title">??? Memory Movie Generator</div>
         <div class="input-group">
           <label class="input-label">Movie Title</label>
-          <input type="text" id="mov-title" placeholder="e.g. Our Family Story — A Lifetime of Memories">
+          <input type="text" id="mov-title" placeholder="e.g. Our Family Story � A Lifetime of Memories">
         </div>
         <div class="input-group">
           <label class="input-label">Story / Script (or describe what to show)</label>
@@ -867,7 +855,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
         <div class="btn-row">
           <button class="btn btn-outline btn-sm" onclick="copyText('mov-output')">Copy Script</button>
           <button class="btn btn-outline btn-sm" onclick="downloadText('mov-output','movie-script.txt')">Download</button>
-          <button class="btn btn-outline btn-sm" onclick="sendScriptToVoice()">Send to Voice Narrator →</button>
+          <button class="btn btn-outline btn-sm" onclick="sendScriptToVoice()">Send to Voice Narrator ?</button>
         </div>
       </div>
     </div>
@@ -875,7 +863,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
     <!-- AVATAR -->
     <div class="panel" id="panel-avatar">
       <div class="card cyan">
-        <div class="card-title">🗣️ Avatar Narrator</div>
+        <div class="card-title">??? Avatar Narrator</div>
         <div class="input-group">
           <label class="input-label">Narration Script</label>
           <textarea id="av-script" placeholder="Enter the narration text your AI avatar will speak..."></textarea>
@@ -901,10 +889,10 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
         <div class="input-group">
           <label class="input-label">ElevenLabs Voice</label>
           <select id="av-voice">
-            <option value="21m00Tcm4TlvDq8ikWAM">Rachel — Female, Warm</option>
-            <option value="pNInz6obpgDQGcFmaJgB">Adam — Male, Deep</option>
-            <option value="VR6AewLTigWG4xSOukaG">Arnold — Male, Authoritative</option>
-            <option value="EXAVITQu4vr4xnSDxMaL">Bella — Female, Soft</option>
+            <option value="21m00Tcm4TlvDq8ikWAM">Rachel � Female, Warm</option>
+            <option value="pNInz6obpgDQGcFmaJgB">Adam � Male, Deep</option>
+            <option value="VR6AewLTigWG4xSOukaG">Arnold � Male, Authoritative</option>
+            <option value="EXAVITQu4vr4xnSDxMaL">Bella � Female, Soft</option>
           </select>
         </div>
         <div class="btn-row">
@@ -925,40 +913,40 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
 <!-- SETTINGS MODAL -->
 <div class="modal-overlay" id="settings-modal">
   <div class="modal">
-    <button class="modal-close" onclick="closeSettings()">✕</button>
-    <div class="modal-title">⚙ API Configuration</div>
+    <button class="modal-close" onclick="closeSettings()">?</button>
+    <div class="modal-title">? API Configuration</div>
     <div class="modal-sub">Keys are stored in your browser only. Never shared externally.</div>
 
     <div class="input-group">
-      <label class="input-label">🧠 Groq API Key (AI Writing, Grammar, Story)</label>
+      <label class="input-label">?? Groq API Key (AI Writing, Grammar, Story)</label>
       <input type="password" id="key-groq" placeholder="gsk_...">
     </div>
     <div class="input-group">
-      <label class="input-label">🔊 ElevenLabs API Key (Voice & Audio)</label>
+      <label class="input-label">?? ElevenLabs API Key (Voice & Audio)</label>
       <input type="password" id="key-eleven" placeholder="Your ElevenLabs key...">
     </div>
     <div class="input-group">
-      <label class="input-label">🎨 Hugging Face Token (Image Generation)</label>
+      <label class="input-label">?? Hugging Face Token (Image Generation)</label>
       <input type="password" id="key-hf" placeholder="hf_...">
     </div>
     <div class="input-group">
-      <label class="input-label">🔍 SerpAPI Key (Web Search)</label>
+      <label class="input-label">?? SerpAPI Key (Web Search)</label>
       <input type="password" id="key-serp" placeholder="Your SerpAPI key...">
     </div>
     <div class="input-group">
-      <label class="input-label">📧 EmailJS Service ID</label>
+      <label class="input-label">?? EmailJS Service ID</label>
       <input type="text" id="key-emailjs-service" placeholder="service_xxxxxxx">
     </div>
     <div class="input-group">
-      <label class="input-label">📧 EmailJS Template ID</label>
+      <label class="input-label">?? EmailJS Template ID</label>
       <input type="text" id="key-emailjs-template" placeholder="template_xxxxxxx">
     </div>
     <div class="input-group">
-      <label class="input-label">📧 EmailJS Public Key</label>
+      <label class="input-label">?? EmailJS Public Key</label>
       <input type="password" id="key-emailjs-public" placeholder="Your EmailJS public key...">
     </div>
     <div class="input-group">
-      <label class="input-label">🎥 Runway API Key (Video Generation)</label>
+      <label class="input-label">?? Runway API Key (Video Generation)</label>
       <input type="password" id="key-runway" placeholder="Your Runway key...">
     </div>
     <div class="btn-row">
@@ -983,7 +971,7 @@ function saveSettings(){
     const el = document.getElementById('key-'+k);
     if(el && el.value.trim()) localStorage.setItem('omni_'+k, el.value.trim());
   });
-  showStatus('settings-status','Keys saved securely in browser ✓','ok');
+  showStatus('settings-status','Keys saved securely in browser ?','ok');
   updateApiStatus();
   setTimeout(closeSettings,1500);
 }
@@ -1003,8 +991,8 @@ function closeSettings(){ document.getElementById('settings-modal').classList.re
 function updateApiStatus(){
   const groq=getKey('groq');
   const badge=document.getElementById('api-status');
-  if(groq){badge.textContent='✓ API Ready';badge.style.color='var(--green)';badge.style.borderColor='rgba(0,255,157,0.3)';}
-  else{badge.textContent='⚠ Configure API Keys';badge.style.color='var(--cyan)';badge.style.borderColor='rgba(0,229,255,0.3)';}
+  if(groq){badge.textContent='? API Ready';badge.style.color='var(--green)';badge.style.borderColor='rgba(0,255,157,0.3)';}
+  else{badge.textContent='? Configure API Keys';badge.style.color='var(--cyan)';badge.style.borderColor='rgba(0,229,255,0.3)';}
 }
 updateApiStatus();
 
@@ -1065,7 +1053,7 @@ function downloadText(id, filename){
 // ============================================================
 async function callGroq(systemPrompt, userPrompt, maxTokens=1500){
   const key=getKey('groq');
-  if(!key) throw new Error('No Groq API key. Click ⚙ Settings to add your key.');
+  if(!key) throw new Error('No Groq API key. Click ? Settings to add your key.');
   const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
     method:'POST',
     headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
@@ -1094,11 +1082,11 @@ async function runWriting(){
   document.getElementById('wr-output').textContent='Writing...';
   try{
     const result=await callGroq(
-      `You are a master ${genre} novelist. Write in a ${style} style. Target ~${words} words. Write vivid, immersive, publication-quality fiction. No preamble — start the story immediately.`,
+      `You are a master ${genre} novelist. Write in a ${style} style. Target ~${words} words. Write vivid, immersive, publication-quality fiction. No preamble � start the story immediately.`,
       prompt, Math.floor(words*2)
     );
     document.getElementById('wr-output').textContent=result;
-    showStatus('wr-status','Story generated ✓','ok');
+    showStatus('wr-status','Story generated ?','ok');
   }catch(e){showStatus('wr-status',e.message,'err');document.getElementById('wr-output').textContent='';}
 }
 async function continueWriting(){
@@ -1109,7 +1097,7 @@ async function continueWriting(){
     const result=await callGroq('You are a master novelist. Continue the story naturally. Match the existing style and tone exactly. No preamble.',
       'Continue this story:\n\n'+existing.slice(-500), 800);
     document.getElementById('wr-output').textContent=existing+'\n\n'+result;
-    showStatus('wr-status','Story continued ✓','ok');
+    showStatus('wr-status','Story continued ?','ok');
   }catch(e){showStatus('wr-status',e.message,'err');}
 }
 function sendToBook(){
@@ -1147,7 +1135,7 @@ async function runGrammar(mode){
   try{
     const result=await callGroq(sys,user,1500);
     document.getElementById('gr-output').textContent=result;
-    showStatus('gr-status','Done ✓','ok');
+    showStatus('gr-status','Done ?','ok');
   }catch(e){showStatus('gr-status',e.message,'err');}
 }
 
@@ -1158,7 +1146,7 @@ async function runImageGen(){
   const prompt=document.getElementById('img-prompt').value.trim();
   if(!prompt){showStatus('img-status','Enter an image prompt first','err');return;}
   const key=getKey('hf');
-  if(!key){showStatus('img-status','Add Hugging Face token in ⚙ Settings','err');return;}
+  if(!key){showStatus('img-status','Add Hugging Face token in ? Settings','err');return;}
   const style=document.getElementById('img-style').value;
   const neg=document.getElementById('img-negative').value;
   const fullPrompt=`${prompt}, ${style} style, highly detailed, masterpiece quality`;
@@ -1175,10 +1163,10 @@ async function runImageGen(){
     const url=URL.createObjectURL(blob);
     document.getElementById('img-output').innerHTML=`<img src="${url}" class="img-output" id="gen-img">`;
     document.getElementById('img-dl-row').style.display='flex';
-    showStatus('img-status','Image generated ✓','ok');
+    showStatus('img-status','Image generated ?','ok');
   }catch(e){
     showStatus('img-status',e.message,'err');
-    document.getElementById('img-output').innerHTML='<div class="img-placeholder">Generation failed — check your HF token</div>';
+    document.getElementById('img-output').innerHTML='<div class="img-placeholder">Generation failed � check your HF token</div>';
   }
 }
 function downloadImage(){
@@ -1193,7 +1181,7 @@ async function enhancePrompt(){
   try{
     const enhanced=await callGroq('You are an expert Stable Diffusion prompt engineer. Enhance the given prompt to produce a stunning, detailed image. Return only the enhanced prompt, no explanation.',prompt,200);
     document.getElementById('img-prompt').value=enhanced;
-    showStatus('img-status','Prompt enhanced ✓','ok');
+    showStatus('img-status','Prompt enhanced ?','ok');
   }catch(e){showStatus('img-status',e.message,'err');}
 }
 
@@ -1204,7 +1192,7 @@ async function runVoice(){
   const text=document.getElementById('voice-text').value.trim();
   if(!text){showStatus('voice-status','Enter text first','err');return;}
   const key=getKey('eleven');
-  if(!key){showStatus('voice-status','Add ElevenLabs API key in ⚙ Settings','err');return;}
+  if(!key){showStatus('voice-status','Add ElevenLabs API key in ? Settings','err');return;}
   const voiceId=document.getElementById('voice-select').value;
   const stability=parseFloat(document.getElementById('voice-stability').value)||0.5;
   showStatus('voice-status','Generating voice audio...','info');
