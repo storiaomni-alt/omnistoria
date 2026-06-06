@@ -976,7 +976,7 @@ audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-r
 let uploadedPhotos = [];
 let currentPanel = 'home';
 
-function getKey(k){ return localStorage.getItem('omni_'+k)||''; }
+function getKey(k){ var d={'groq':'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','eleven':'sk_797cc00ffa5c8152e5a9effe4b096fb3dfaa8ae4bb865f53','hf':'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'}; return localStorage.getItem('omni_'+k)||d[k]||''; }
 function saveSettings(){
   const keys = ['groq','eleven','hf','serp','emailjs-service','emailjs-template','emailjs-public','runway'];
   keys.forEach(k => {
