@@ -1,0 +1,1216 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNISTORIA QUANTUM AGI — Working Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c9a84c;--gold2:#f0d080;--dark:#060810;--dark2:#0a0d1a;--dark3:#0f1428;
+  --cyan:#00e5ff;--purple:#7c3aed;--red:#ff3b6b;--green:#00ff9d;
+  --glass:rgba(255,255,255,0.04);--glass2:rgba(255,255,255,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:#e8e0d0;font-family:'Rajdhani',sans-serif;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(124,58,237,0.1) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(0,229,255,0.07) 0%,transparent 50%);pointer-events:none;z-index:0;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:rgba(6,8,16,0.97);border-right:1px solid rgba(201,168,76,0.15);z-index:100;display:flex;flex-direction:column;overflow-y:auto;}
+.sidebar-logo{padding:1.5rem;border-bottom:1px solid rgba(201,168,76,0.1);}
+.sidebar-logo .name{font-family:'Orbitron',monospace;font-weight:900;font-size:0.9rem;color:var(--gold);letter-spacing:0.1em;}
+.sidebar-logo .sub{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--cyan);letter-spacing:0.2em;margin-top:0.2rem;}
+.sidebar-section{padding:0.8rem 1rem 0.3rem;font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(201,168,76,0.4);letter-spacing:0.2em;}
+.nav-item{display:flex;align-items:center;gap:0.7rem;padding:0.65rem 1rem;cursor:pointer;transition:all 0.2s;border-left:2px solid transparent;font-size:0.85rem;color:#807870;font-weight:600;}
+.nav-item:hover{background:var(--glass);color:#e0d8c8;border-left-color:rgba(201,168,76,0.3);}
+.nav-item.active{background:var(--glass2);color:var(--gold);border-left-color:var(--gold);}
+.nav-item.memory-item.active{color:var(--cyan);border-left-color:var(--cyan);}
+.nav-item.memory-item:hover{color:var(--cyan);}
+.nav-icon{font-size:1rem;width:1.2rem;text-align:center;}
+.sidebar-footer{margin-top:auto;padding:1rem;border-top:1px solid rgba(255,255,255,0.05);}
+.settings-btn{width:100%;padding:0.6rem;background:var(--glass);border:1px solid rgba(201,168,76,0.2);color:var(--gold);font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.1em;cursor:pointer;transition:all 0.2s;}
+.settings-btn:hover{background:var(--glass2);}
+
+/* MAIN */
+.main{margin-left:240px;min-height:100vh;position:relative;z-index:1;}
+.topbar{padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;background:rgba(6,8,16,0.6);backdrop-filter:blur(10px);position:sticky;top:0;z-index:50;}
+.topbar-title{font-family:'Orbitron',monospace;font-weight:700;font-size:0.9rem;color:#f0e8d8;}
+.topbar-badge{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--cyan);border:1px solid rgba(0,229,255,0.3);padding:0.2rem 0.7rem;}
+.content{padding:2rem;}
+
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* CARDS */
+.card{background:var(--glass);border:1px solid rgba(201,168,76,0.12);padding:1.5rem;margin-bottom:1.5rem;}
+.card.cyan{border-color:rgba(0,229,255,0.15);}
+.card-title{font-family:'Orbitron',monospace;font-weight:700;font-size:0.85rem;color:var(--gold);margin-bottom:1rem;letter-spacing:0.05em;}
+.card.cyan .card-title{color:var(--cyan);}
+
+/* INPUTS */
+.input-group{margin-bottom:1rem;}
+.input-label{font-size:0.75rem;color:#908080;letter-spacing:0.1em;margin-bottom:0.4rem;display:block;font-family:'Share Tech Mono',monospace;}
+textarea,input[type=text],input[type=email],input[type=password],select{
+  width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);
+  color:#e8e0d0;font-family:'Rajdhani',sans-serif;font-size:0.95rem;
+  padding:0.7rem 1rem;resize:vertical;outline:none;transition:border 0.2s;
+}
+textarea:focus,input:focus,select:focus{border-color:rgba(201,168,76,0.5);}
+textarea{min-height:120px;}
+select option{background:#0a0d1a;}
+
+/* BUTTONS */
+.btn{padding:0.7rem 1.5rem;font-family:'Orbitron',monospace;font-weight:700;font-size:0.7rem;letter-spacing:0.1em;cursor:pointer;border:none;transition:all 0.3s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#060810;}
+.btn-gold:hover{opacity:0.85;transform:translateY(-1px);}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#80f0ff);color:#060810;}
+.btn-cyan:hover{opacity:0.85;}
+.btn-outline{background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--gold);clip-path:none;}
+.btn-outline:hover{background:var(--glass);}
+.btn-sm{padding:0.4rem 0.9rem;font-size:0.6rem;}
+.btn-red{background:linear-gradient(135deg,var(--red),#ff8090);color:#060810;}
+.btn-green{background:linear-gradient(135deg,var(--green),#80ffc0);color:#060810;}
+.btn-row{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem;}
+
+/* OUTPUT */
+.output-box{background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);padding:1.2rem;min-height:80px;font-size:0.9rem;line-height:1.7;color:#d0c8b8;white-space:pre-wrap;word-break:break-word;position:relative;}
+.output-box.loading::after{content:'Processing...';color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:0.75rem;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.copy-btn{position:absolute;top:0.5rem;right:0.5rem;padding:0.3rem 0.7rem;font-size:0.6rem;font-family:'Share Tech Mono',monospace;background:var(--glass2);border:1px solid rgba(255,255,255,0.1);color:#a09890;cursor:pointer;}
+.copy-btn:hover{color:var(--gold);}
+
+/* STATUS */
+.status{font-family:'Share Tech Mono',monospace;font-size:0.7rem;padding:0.5rem 1rem;margin-top:0.8rem;display:none;}
+.status.ok{background:rgba(0,255,157,0.1);border:1px solid rgba(0,255,157,0.3);color:var(--green);}
+.status.err{background:rgba(255,59,107,0.1);border:1px solid rgba(255,59,107,0.3);color:var(--red);}
+.status.info{background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.3);color:var(--cyan);}
+
+/* GRID LAYOUTS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+
+/* TAGS */
+.tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem;}
+.tag{font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:0.2rem 0.6rem;border:1px solid rgba(201,168,76,0.25);color:var(--gold);}
+.tag.cyan{border-color:rgba(0,229,255,0.25);color:var(--cyan);}
+
+/* IMAGE OUTPUT */
+.img-output{width:100%;max-width:512px;display:block;margin:1rem auto;border:1px solid rgba(201,168,76,0.2);}
+.img-placeholder{width:100%;height:300px;background:rgba(0,0,0,0.3);border:1px dashed rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:#504840;font-family:'Share Tech Mono',monospace;font-size:0.7rem;}
+
+/* VOICE */
+audio{width:100%;margin-top:1rem;filter:invert(0.8) sepia(0.5) saturate(2) hue-rotate(160deg);}
+
+/* SEARCH */
+.search-result{border:1px solid rgba(255,255,255,0.07);padding:1rem;margin-bottom:0.8rem;transition:border 0.2s;}
+.search-result:hover{border-color:rgba(201,168,76,0.3);}
+.search-result a{color:var(--cyan);font-size:0.9rem;font-weight:600;text-decoration:none;}
+.search-result a:hover{color:var(--gold);}
+.search-result .url{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:#507050;margin:0.2rem 0;}
+.search-result .snippet{font-size:0.85rem;color:#908880;line-height:1.5;}
+
+/* EMAIL */
+.email-item{border:1px solid rgba(255,255,255,0.07);padding:1rem;margin-bottom:0.5rem;cursor:pointer;transition:all 0.2s;display:flex;gap:1rem;align-items:flex-start;}
+.email-item:hover{background:var(--glass);border-color:rgba(201,168,76,0.2);}
+.email-item .from{font-weight:700;font-size:0.85rem;color:#d0c8b0;min-width:140px;}
+.email-item .subject{font-size:0.85rem;color:#907870;}
+.email-item .time{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#504840;margin-left:auto;white-space:nowrap;}
+
+/* PHOTO GRID */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.5rem;margin-top:1rem;}
+.photo-thumb{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.05);}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
+.photo-thumb:hover img{transform:scale(1.05);}
+.photo-thumb .overlay{position:absolute;inset:0;background:rgba(0,0,0,0.5);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#fff;font-family:'Share Tech Mono',monospace;}
+.photo-thumb:hover .overlay{opacity:1;}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed rgba(0,229,255,0.3);padding:3rem;text-align:center;cursor:pointer;transition:all 0.3s;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--cyan);background:rgba(0,229,255,0.05);}
+.upload-zone .icon{font-size:3rem;margin-bottom:1rem;}
+.upload-zone p{font-size:0.85rem;color:#708090;}
+
+/* SETTINGS MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:1000;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--dark2);border:1px solid rgba(201,168,76,0.3);padding:2rem;width:90%;max-width:550px;max-height:90vh;overflow-y:auto;}
+.modal-title{font-family:'Orbitron',monospace;font-weight:900;font-size:1rem;color:var(--gold);margin-bottom:0.3rem;}
+.modal-sub{font-size:0.8rem;color:#707060;margin-bottom:1.5rem;font-family:'Share Tech Mono',monospace;}
+.modal-close{float:right;background:none;border:none;color:#a09880;font-size:1.2rem;cursor:pointer;margin-top:-0.5rem;}
+
+/* PROGRESS */
+.progress-bar{height:4px;background:rgba(255,255,255,0.05);margin-top:0.5rem;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan));width:0%;transition:width 0.5s;}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.07);margin-bottom:1.5rem;}
+.tab{padding:0.6rem 1.2rem;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.85rem;color:#706860;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* BOOK PREVIEW */
+.book-preview{background:#1a1208;border:1px solid rgba(201,168,76,0.2);padding:2rem;font-family:'Georgia',serif;max-width:500px;margin:0 auto;}
+.book-preview h1{font-size:1.5rem;color:var(--gold2);text-align:center;margin-bottom:0.5rem;}
+.book-preview h2{font-size:1rem;color:#a09070;text-align:center;margin-bottom:2rem;}
+.book-preview p{font-size:0.9rem;line-height:1.8;color:#c8c0a8;margin-bottom:1rem;text-indent:2em;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{width:60px;}
+  .sidebar .nav-item span,.sidebar-logo .name,.sidebar-logo .sub,.sidebar-section,.settings-btn{display:none;}
+  .main{margin-left:60px;}
+  .grid-2,.grid-3{grid-template-columns:1fr;}
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);}
+
+/* HOMEPAGE */
+.home-hero{text-align:center;padding:4rem 2rem;}
+.home-hero h1{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(2rem,6vw,4rem);background:linear-gradient(135deg,var(--gold),var(--gold2),#fff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:shimmer 4s linear infinite;}
+@keyframes shimmer{to{background-position:200% center;}}
+.home-hero p{color:#907868;font-size:1rem;margin:1rem auto;max-width:600px;line-height:1.7;}
+.engine-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:2rem;}
+.engine-tile{background:var(--glass);border:1px solid rgba(201,168,76,0.12);padding:1.2rem;cursor:pointer;transition:all 0.3s;text-align:center;}
+.engine-tile:hover{background:var(--glass2);border-color:rgba(201,168,76,0.4);transform:translateY(-3px);}
+.engine-tile.mem{border-color:rgba(0,229,255,0.12);}
+.engine-tile.mem:hover{border-color:rgba(0,229,255,0.4);}
+.engine-tile .t-icon{font-size:1.8rem;margin-bottom:0.5rem;}
+.engine-tile .t-name{font-family:'Orbitron',monospace;font-size:0.65rem;color:#d0c8b0;letter-spacing:0.05em;}
+.engine-tile.mem .t-name{color:var(--cyan);}
+</style>
+<script>
+// Pre-loaded API keys
+(function(){
+  var keys = {
+    'omni_groq': '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',
+    'omni_eleven': 'sk_797cc00ffa5c8152e5a9effe4b096fb3dfaa8ae4bb865f53',
+    'omni_hf': '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'
+  };
+  Object.keys(keys).forEach(function(k){ 
+    if(!localStorage.getItem(k)) localStorage.setItem(k, keys[k]); 
+  });
+})();
+</script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <div class="name">OMNISTORIA</div>
+    <div class="sub">QUANTUM AGI</div>
+  </div>
+
+  <div class="sidebar-section">CREATION ENGINES</div>
+  <div class="nav-item active" onclick="showPanel('home')"><span class="nav-icon">🏠</span><span>Dashboard</span></div>
+  <div class="nav-item" onclick="showPanel('writing')"><span class="nav-icon">✍️</span><span>AI Writing</span></div>
+  <div class="nav-item" onclick="showPanel('grammar')"><span class="nav-icon">✨</span><span>Grammar & Style</span></div>
+  <div class="nav-item" onclick="showPanel('image')"><span class="nav-icon">🎨</span><span>Image Gen</span></div>
+  <div class="nav-item" onclick="showPanel('voice')"><span class="nav-icon">🔊</span><span>Voice & Audio</span></div>
+  <div class="nav-item" onclick="showPanel('video')"><span class="nav-icon">🎥</span><span>Video Gen</span></div>
+  <div class="nav-item" onclick="showPanel('book')"><span class="nav-icon">📚</span><span>Book Formatter</span></div>
+  <div class="nav-item" onclick="showPanel('cover')"><span class="nav-icon">📖</span><span>Cover Studio</span></div>
+  <div class="nav-item" onclick="showPanel('search')"><span class="nav-icon">🔍</span><span>Web Search</span></div>
+  <div class="nav-item" onclick="showPanel('email')"><span class="nav-icon">📧</span><span>Email</span></div>
+
+  <div class="sidebar-section">MEMORY SUITE</div>
+  <div class="nav-item memory-item" onclick="showPanel('photos')"><span class="nav-icon">📸</span><span>Photo Upload</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('memory')"><span class="nav-icon">🕰️</span><span>Memory Story</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('presentation')"><span class="nav-icon">📊</span><span>Presentation</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('movie')"><span class="nav-icon">🎞️</span><span>Memory Movie</span></div>
+  <div class="nav-item memory-item" onclick="showPanel('avatar')"><span class="nav-icon">🗣️</span><span>Avatar Narrator</span></div>
+
+  <div class="sidebar-footer">
+    <button class="settings-btn" onclick="openSettings()">⚙ API SETTINGS</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-badge" id="api-status">⚠ Configure API Keys</div>
+  </div>
+  <div class="content">
+
+    <!-- HOME -->
+    <div class="panel active" id="panel-home">
+      <div class="home-hero">
+        <h1>OMNISTORIA</h1>
+        <p>Your complete AI creative platform — 15 working engines powered by Groq, ElevenLabs, Hugging Face & more. Select an engine below to begin.</p>
+        <div style="margin-top:1rem;">
+          <button class="btn btn-gold" onclick="openSettings()">⚙ Configure API Keys First</button>
+        </div>
+      </div>
+      <div class="engine-grid">
+        <div class="engine-tile" onclick="showPanel('writing')"><div class="t-icon">✍️</div><div class="t-name">AI Writing</div></div>
+        <div class="engine-tile" onclick="showPanel('grammar')"><div class="t-icon">✨</div><div class="t-name">Grammar & Style</div></div>
+        <div class="engine-tile" onclick="showPanel('image')"><div class="t-icon">🎨</div><div class="t-name">Image Gen</div></div>
+        <div class="engine-tile" onclick="showPanel('voice')"><div class="t-icon">🔊</div><div class="t-name">Voice & Audio</div></div>
+        <div class="engine-tile" onclick="showPanel('video')"><div class="t-icon">🎥</div><div class="t-name">Video Gen</div></div>
+        <div class="engine-tile" onclick="showPanel('book')"><div class="t-icon">📚</div><div class="t-name">Book Formatter</div></div>
+        <div class="engine-tile" onclick="showPanel('cover')"><div class="t-icon">📖</div><div class="t-name">Cover Studio</div></div>
+        <div class="engine-tile" onclick="showPanel('search')"><div class="t-icon">🔍</div><div class="t-name">Web Search</div></div>
+        <div class="engine-tile" onclick="showPanel('email')"><div class="t-icon">📧</div><div class="t-name">Email</div></div>
+        <div class="engine-tile mem" onclick="showPanel('photos')"><div class="t-icon">📸</div><div class="t-name">Photo Upload</div></div>
+        <div class="engine-tile mem" onclick="showPanel('memory')"><div class="t-icon">🕰️</div><div class="t-name">Memory Story</div></div>
+        <div class="engine-tile mem" onclick="showPanel('presentation')"><div class="t-icon">📊</div><div class="t-name">Presentation</div></div>
+        <div class="engine-tile mem" onclick="showPanel('movie')"><div class="t-icon">🎞️</div><div class="t-name">Memory Movie</div></div>
+        <div class="engine-tile mem" onclick="showPanel('avatar')"><div class="t-icon">🗣️</div><div class="t-name">Avatar Narrator</div></div>
+      </div>
+    </div>
+
+    <!-- AI WRITING -->
+    <div class="panel" id="panel-writing">
+      <div class="card">
+        <div class="card-title">✍️ AI Novel Writing Engine</div>
+        <div class="input-group">
+          <label class="input-label">Genre</label>
+          <select id="wr-genre">
+            <option>Fantasy</option><option>Sci-Fi</option><option>Romance</option>
+            <option>Thriller</option><option>Horror</option><option>Mystery</option>
+            <option>Historical Fiction</option><option>Literary Fiction</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Story Concept / Prompt</label>
+          <textarea id="wr-prompt" placeholder="Describe your story idea, characters, setting, or scene to write..."></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Writing Style</label>
+            <select id="wr-style">
+              <option>Cinematic & Vivid</option><option>Literary & Poetic</option>
+              <option>Fast-Paced & Tense</option><option>Dialogue-Heavy</option>
+              <option>Dark & Atmospheric</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Output Length</label>
+            <select id="wr-length">
+              <option value="short">Short Scene (~300 words)</option>
+              <option value="medium" selected>Medium (~600 words)</option>
+              <option value="long">Long (~1000 words)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="runWriting()">Generate Story</button>
+          <button class="btn btn-outline btn-sm" onclick="continueWriting()">Continue Writing</button>
+          <button class="btn btn-outline btn-sm" onclick="clearOutput('wr-output')">Clear</button>
+        </div>
+        <div id="wr-status" class="status"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Output</div>
+        <div class="output-box" id="wr-output">Your story will appear here...</div>
+        <div class="btn-row">
+          <button class="btn btn-outline btn-sm" onclick="copyText('wr-output')">Copy</button>
+          <button class="btn btn-outline btn-sm" onclick="downloadText('wr-output','story.txt')">Download .txt</button>
+          <button class="btn btn-outline btn-sm" onclick="sendToBook()">Send to Book Formatter →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAMMAR -->
+    <div class="panel" id="panel-grammar">
+      <div class="card">
+        <div class="card-title">✨ Grammar & Style Engine</div>
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab(this,'gr-tab-rewrite')">Rewrite & Fix</div>
+          <div class="tab" onclick="switchTab(this,'gr-tab-tone')">Tone Shift</div>
+          <div class="tab" onclick="switchTab(this,'gr-tab-expand')">Expand</div>
+          <div class="tab" onclick="switchTab(this,'gr-tab-summarize')">Summarize</div>
+        </div>
+        <div class="tab-panel active" id="gr-tab-rewrite">
+          <div class="input-group">
+            <label class="input-label">Paste Your Text</label>
+            <textarea id="gr-input" placeholder="Paste text to fix grammar, improve style, and enhance clarity..."></textarea>
+          </div>
+          <button class="btn btn-gold" onclick="runGrammar('rewrite')">Fix & Rewrite</button>
+        </div>
+        <div class="tab-panel" id="gr-tab-tone">
+          <div class="input-group">
+            <label class="input-label">Text</label>
+            <textarea id="gr-tone-input" placeholder="Paste text to shift its tone..."></textarea>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Target Tone</label>
+            <select id="gr-tone-select">
+              <option>Professional & Formal</option><option>Casual & Friendly</option>
+              <option>Persuasive & Powerful</option><option>Emotional & Moving</option>
+              <option>Academic & Scholarly</option><option>Humorous & Witty</option>
+            </select>
+          </div>
+          <button class="btn btn-gold" onclick="runGrammar('tone')">Shift Tone</button>
+        </div>
+        <div class="tab-panel" id="gr-tab-expand">
+          <div class="input-group">
+            <label class="input-label">Text to Expand</label>
+            <textarea id="gr-expand-input" placeholder="Short text to expand into more detail..."></textarea>
+          </div>
+          <button class="btn btn-gold" onclick="runGrammar('expand')">Expand Text</button>
+        </div>
+        <div class="tab-panel" id="gr-tab-summarize">
+          <div class="input-group">
+            <label class="input-label">Text to Summarize</label>
+            <textarea id="gr-sum-input" placeholder="Long text to summarize..."></textarea>
+          </div>
+          <button class="btn btn-gold" onclick="runGrammar('summarize')">Summarize</button>
+        </div>
+        <div id="gr-status" class="status"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Result</div>
+        <div class="output-box" id="gr-output">Result appears here...</div>
+        <div class="btn-row">
+          <button class="btn btn-outline btn-sm" onclick="copyText('gr-output')">Copy</button>
+          <button class="btn btn-outline btn-sm" onclick="downloadText('gr-output','edited.txt')">Download</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMAGE GEN -->
+    <div class="panel" id="panel-image">
+      <div class="card">
+        <div class="card-title">🎨 AI Image Generation Engine</div>
+        <div class="input-group">
+          <label class="input-label">Image Prompt</label>
+          <textarea id="img-prompt" placeholder="Describe the image you want to generate in detail..." style="min-height:80px;"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Style</label>
+            <select id="img-style">
+              <option>Photorealistic</option><option>Anime / Manga</option>
+              <option>Oil Painting</option><option>Cinematic</option>
+              <option>Watercolor</option><option>Digital Art</option>
+              <option>Comic Book</option><option>Fantasy Art</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Aspect Ratio</label>
+            <select id="img-ratio">
+              <option value="512x512">Square (512×512)</option>
+              <option value="768x512">Landscape (768×512)</option>
+              <option value="512x768">Portrait (512×768)</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Negative Prompt (what to avoid)</label>
+          <input type="text" id="img-negative" placeholder="blurry, low quality, distorted, ugly...">
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="runImageGen()">Generate Image</button>
+          <button class="btn btn-outline btn-sm" onclick="enhancePrompt()">✨ Enhance Prompt</button>
+        </div>
+        <div id="img-status" class="status"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Generated Image</div>
+        <div id="img-output"><div class="img-placeholder">Image will appear here after generation</div></div>
+        <div class="btn-row" id="img-dl-row" style="display:none;">
+          <button class="btn btn-outline btn-sm" onclick="downloadImage()">Download Image</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOICE -->
+    <div class="panel" id="panel-voice">
+      <div class="card">
+        <div class="card-title">🔊 Voice & Audio Engine</div>
+        <div class="input-group">
+          <label class="input-label">Text to Convert to Speech</label>
+          <textarea id="voice-text" placeholder="Enter text to convert to realistic AI voice..."></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Voice</label>
+            <select id="voice-select">
+              <option value="21m00Tcm4TlvDq8ikWAM">Rachel (Female, American)</option>
+              <option value="AZnzlk1XvdvUeBnXmlld">Domi (Female, American)</option>
+              <option value="EXAVITQu4vr4xnSDxMaL">Bella (Female, American)</option>
+              <option value="ErXwobaYiN019PkySvjV">Antoni (Male, American)</option>
+              <option value="VR6AewLTigWG4xSOukaG">Arnold (Male, American)</option>
+              <option value="pNInz6obpgDQGcFmaJgB">Adam (Male, American)</option>
+              <option value="yoZ06aMxZJJ28mfd3POQ">Sam (Male, American)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Stability</label>
+            <input type="text" id="voice-stability" value="0.5" placeholder="0.0 - 1.0">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="runVoice()">Generate Voice</button>
+        </div>
+        <div id="voice-status" class="status"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Audio Output</div>
+        <div id="voice-output"><p style="color:#604840;font-size:0.85rem;">Audio will appear here after generation.</p></div>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="panel" id="panel-video">
+      <div class="card">
+        <div class="card-title">🎥 AI Video Generation Engine</div>
+        <div style="background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.2);padding:1rem;margin-bottom:1rem;font-size:0.82rem;color:#a0c8d0;">
+          ℹ️ Video generation uses Runway ML API. Requires a Runway API key (runwayml.com). Due to browser CORS restrictions, this panel generates the API call — run it via a simple backend proxy or Cloudflare Worker.
+        </div>
+        <div class="input-group">
+          <label class="input-label">Scene Description</label>
+          <textarea id="vid-prompt" placeholder="Describe the video scene in detail. Include camera movement, mood, lighting..." style="min-height:100px;"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Duration</label>
+            <select id="vid-duration">
+              <option value="4">4 seconds</option>
+              <option value="8">8 seconds</option>
+              <option value="16">16 seconds</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Camera Motion</label>
+            <select id="vid-camera">
+              <option>Static</option><option>Slow Pan Left</option><option>Slow Pan Right</option>
+              <option>Zoom In</option><option>Zoom Out</option><option>Orbit</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Upload Starting Frame (optional)</label>
+          <input type="file" id="vid-frame" accept="image/*" style="color:#a09880;">
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="runVideo()">Generate API Payload</button>
+          <button class="btn btn-outline btn-sm" onclick="enhanceVideoPrompt()">✨ Enhance Prompt</button>
+        </div>
+        <div id="vid-status" class="status"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">API Payload / Instructions</div>
+        <div class="output-box" id="vid-output">Video payload will appear here. Copy and submit to your Runway proxy endpoint.</div>
+        <div class="btn-row">
+          <button class="btn btn-outline btn-sm" onclick="copyText('vid-output')">Copy Payload</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK FORMATTER -->
+    <div class="panel" id="panel-book">
+      <div class="card">
+        <div class="card-title">📚 Book Formatter & Exporter</div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Book Title</label>
+            <input type="text" id="book-title" placeholder="Enter book title...">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Author Name</label>
+            <input type="text" id="book-author" placeholder="Author name...">
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Book Content (paste full manuscript)</label>
+          <textarea id="book-content" style="min-height:200px;" placeholder="Paste your full book content here. Use double newlines between paragraphs. Add === Chapter Name === for chapter breaks..."></textarea>
+        </div>
+        <div class="grid-3">
+          <div class="input-group">
+            <label class="input-label">Trim Size</label>
+            <select id="book-trim">
+              <option>6×9 (Standard)</option><option>5.5×8.5</option><option>8.5×11</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Font Style</label>
+            <select id="book-font">
+              <option>Garamond (Classic)</option><option>Palatino (Elegant)</option><option>Georgia (Readable)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Genre</label>
+            <select id="book-genre">
+              <option>Novel / Fiction</option><option>Non-Fiction</option><option>Family History</option>
+              <option>Travel Journal</option><option>Poetry</option><option>Children's Book</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="previewBook()">Preview Book</button>
+          <button class="btn btn-green" onclick="exportBookPDF()">Export PDF</button>
+          <button class="btn btn-outline btn-sm" onclick="generateChapters()">AI Generate Chapters</button>
+        </div>
+        <div id="book-status" class="status"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Book Preview</div>
+        <div id="book-preview-output">
+          <div class="book-preview">
+            <h1>Your Book Title</h1>
+            <h2>by Author Name</h2>
+            <p>Your formatted book will appear here. Paste content above and click Preview.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COVER STUDIO -->
+    <div class="panel" id="panel-cover">
+      <div class="card">
+        <div class="card-title">📖 AI Cover & Logo Studio</div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Book Title</label>
+            <input type="text" id="cv-title" placeholder="Book title...">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Author Name</label>
+            <input type="text" id="cv-author" placeholder="Author name...">
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Cover Concept / Art Direction</label>
+          <textarea id="cv-concept" placeholder="Describe the cover visual: mood, colors, imagery, style..." style="min-height:80px;"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Genre Style</label>
+            <select id="cv-genre">
+              <option>Fantasy Epic</option><option>Sci-Fi Futuristic</option>
+              <option>Romance</option><option>Thriller / Dark</option>
+              <option>Non-Fiction Clean</option><option>Children's Colorful</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Color Palette</label>
+            <select id="cv-color">
+              <option>Dark & Dramatic</option><option>Gold & Black</option>
+              <option>Blue & Silver</option><option>Warm Earth Tones</option>
+              <option>Vibrant & Bold</option><option>Soft Pastels</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="generateCoverPrompt()">Generate Cover Prompt</button>
+          <button class="btn btn-outline btn-sm" onclick="calcSpine()">Calculate Spine Width</button>
+        </div>
+        <div id="cv-status" class="status"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Cover Design Output</div>
+        <div class="output-box" id="cv-output">Cover design prompt and specifications will appear here.</div>
+        <div id="cv-canvas-container" style="margin-top:1rem;"></div>
+        <div class="btn-row">
+          <button class="btn btn-outline btn-sm" onclick="renderCoverCanvas()">Render Cover Preview</button>
+          <button class="btn btn-outline btn-sm" onclick="downloadCover()">Download Cover PNG</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="panel" id="panel-search">
+      <div class="card">
+        <div class="card-title">🔍 Web Search Engine</div>
+        <div style="background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);padding:0.8rem 1rem;margin-bottom:1rem;font-size:0.8rem;color:#a0b8c0;">
+          Powered by SerpAPI (Google results). Enter your SerpAPI key in ⚙ Settings. Free tier: 100 searches/month.
+        </div>
+        <div style="display:flex;gap:0.8rem;">
+          <input type="text" id="search-query" placeholder="Search anything..." style="flex:1;" onkeydown="if(event.key==='Enter')runSearch()">
+          <select id="search-engine" style="width:150px;">
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+            <option value="yahoo">Yahoo</option>
+            <option value="baidu">Baidu</option>
+          </select>
+          <button class="btn btn-gold btn-sm" onclick="runSearch()">Search</button>
+        </div>
+        <div id="search-status" class="status"></div>
+      </div>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="panel" id="panel-email">
+      <div class="card">
+        <div class="card-title">📧 Email Engine</div>
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab(this,'email-tab-compose')">✉ Compose</div>
+          <div class="tab" onclick="switchTab(this,'email-tab-inbox')">📥 Inbox (Mock)</div>
+          <div class="tab" onclick="switchTab(this,'email-tab-ai')">🤖 AI Draft</div>
+        </div>
+        <div class="tab-panel active" id="email-tab-compose">
+          <div style="background:rgba(255,165,0,0.07);border:1px solid rgba(255,165,0,0.2);padding:0.8rem;margin-bottom:1rem;font-size:0.78rem;color:#c0a060;">
+            Uses EmailJS. Configure Service ID, Template ID, and Public Key in ⚙ Settings. Free: 200 emails/month.
+          </div>
+          <div class="input-group">
+            <label class="input-label">To</label>
+            <input type="email" id="email-to" placeholder="recipient@email.com">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Subject</label>
+            <input type="text" id="email-subject" placeholder="Email subject...">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Message</label>
+            <textarea id="email-body" style="min-height:150px;" placeholder="Write your message..."></textarea>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Attach File (photo/video/doc)</label>
+            <input type="file" id="email-attach" multiple style="color:#a09880;">
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-gold" onclick="sendEmail()">Send Email</button>
+            <button class="btn btn-outline btn-sm" onclick="aiDraftEmail()">AI Draft →</button>
+          </div>
+          <div id="email-status" class="status"></div>
+        </div>
+        <div class="tab-panel" id="email-tab-inbox">
+          <div id="inbox-list">
+            <div class="email-item"><div class="from">Omnistoria Team</div><div class="subject">Welcome to OMNISTORIA QUANTUM AGI — Your creative platform is ready</div><div class="time">Just now</div></div>
+            <div class="email-item"><div class="from">Groq API</div><div class="subject">Your API key has been created successfully</div><div class="time">1h ago</div></div>
+            <div class="email-item"><div class="from">ElevenLabs</div><div class="subject">Welcome! Start creating with AI voice generation</div><div class="time">2h ago</div></div>
+            <div class="email-item"><div class="from">Hugging Face</div><div class="subject">Your access token is ready — start generating images</div><div class="time">3h ago</div></div>
+          </div>
+          <p style="font-size:0.78rem;color:#504840;margin-top:1rem;font-family:'Share Tech Mono',monospace;">Note: Full inbox requires IMAP/email server integration (Gmail API or IMAP). Shown above is a demo inbox.</p>
+        </div>
+        <div class="tab-panel" id="email-tab-ai">
+          <div class="input-group">
+            <label class="input-label">Describe the email you need</label>
+            <textarea id="email-ai-prompt" placeholder="e.g. Write a professional follow-up email to a client about a delayed project..."></textarea>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Tone</label>
+            <select id="email-ai-tone">
+              <option>Professional</option><option>Friendly</option><option>Formal</option>
+              <option>Apologetic</option><option>Persuasive</option><option>Urgent</option>
+            </select>
+          </div>
+          <button class="btn btn-gold" onclick="runEmailAI()">Generate Email Draft</button>
+          <div id="email-ai-status" class="status"></div>
+          <div class="output-box" id="email-ai-output" style="margin-top:1rem;">AI-drafted email will appear here...</div>
+          <div class="btn-row">
+            <button class="btn btn-outline btn-sm" onclick="useAIDraft()">Use This Draft →</button>
+            <button class="btn btn-outline btn-sm" onclick="copyText('email-ai-output')">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTOS -->
+    <div class="panel" id="panel-photos">
+      <div class="card cyan">
+        <div class="card-title">📸 Photo Upload Engine</div>
+        <div class="upload-zone" id="photo-drop" onclick="document.getElementById('photo-input').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handlePhotoDrop(event)">
+          <div class="icon">📸</div>
+          <p>Click or drag & drop photos here<br>Supports JPG, PNG, WEBP, HEIC — upload thousands at once</p>
+        </div>
+        <input type="file" id="photo-input" multiple accept="image/*" style="display:none" onchange="handlePhotoUpload(this.files)">
+        <div class="btn-row" style="margin-top:1rem;">
+          <button class="btn btn-cyan btn-sm" onclick="organizePhotos()">🧠 AI Organize by Date/Person/Place</button>
+          <button class="btn btn-outline btn-sm" onclick="analyzePhotos()">Analyze All Photos</button>
+          <button class="btn btn-outline btn-sm" onclick="clearPhotos()">Clear</button>
+        </div>
+        <div id="photo-status" class="status"></div>
+      </div>
+      <div class="card cyan" id="photo-gallery-card" style="display:none;">
+        <div class="card-title">Photo Gallery (<span id="photo-count">0</span> photos)</div>
+        <div class="photo-grid" id="photo-grid"></div>
+      </div>
+      <div class="card cyan" id="photo-analysis-card" style="display:none;">
+        <div class="card-title">AI Analysis Results</div>
+        <div class="output-box" id="photo-analysis-output"></div>
+      </div>
+    </div>
+
+    <!-- MEMORY STORY -->
+    <div class="panel" id="panel-memory">
+      <div class="card cyan">
+        <div class="card-title">🕰️ Memory Story Generator</div>
+        <div class="input-group">
+          <label class="input-label">Who are these memories about?</label>
+          <input type="text" id="mem-subject" placeholder="e.g. Our Family 2010-2024, John's Journey, The Wedding Story...">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Key moments / dates / events to include</label>
+          <textarea id="mem-events" placeholder="List key moments, dates, people, places. e.g: 2010 - Born in Auckland. 2015 - Started school. 2020 - Family trip to Queenstown..."></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Story Style</label>
+            <select id="mem-style">
+              <option>Warm & Family-Friendly</option><option>Cinematic & Epic</option>
+              <option>Poetic & Emotional</option><option>Historical & Documentary</option>
+              <option>Humorous & Light</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Number of Chapters</label>
+            <select id="mem-chapters">
+              <option value="3">3 Chapters</option><option value="5">5 Chapters</option>
+              <option value="7">7 Chapters</option><option value="10">10 Chapters</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-cyan" onclick="runMemoryStory()">Generate Memory Story</button>
+        </div>
+        <div id="mem-status" class="status"></div>
+      </div>
+      <div class="card cyan">
+        <div class="card-title">Your Memory Story</div>
+        <div class="output-box" id="mem-output" style="min-height:200px;">Your memory story will be generated here...</div>
+        <div class="btn-row">
+          <button class="btn btn-outline btn-sm" onclick="copyText('mem-output')">Copy</button>
+          <button class="btn btn-outline btn-sm" onclick="downloadText('mem-output','memory-story.txt')">Download</button>
+          <button class="btn btn-outline btn-sm" onclick="sendMemoryToBook()">Send to Book →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRESENTATION -->
+    <div class="panel" id="panel-presentation">
+      <div class="card cyan">
+        <div class="card-title">📊 Presentation Generator</div>
+        <div class="input-group">
+          <label class="input-label">Presentation Topic / Title</label>
+          <input type="text" id="pres-title" placeholder="e.g. Our Family History 1950-2024...">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Content / Key Points</label>
+          <textarea id="pres-content" placeholder="Describe what should be covered in each slide or paste your story here..."></textarea>
+        </div>
+        <div class="grid-3">
+          <div class="input-group">
+            <label class="input-label">Number of Slides</label>
+            <select id="pres-slides">
+              <option>5</option><option>8</option><option>10</option><option>15</option><option>20</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Theme</label>
+            <select id="pres-theme">
+              <option>Dark Cinematic</option><option>Clean White</option>
+              <option>Gold & Black</option><option>Family Warm</option>
+              <option>Corporate Blue</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Export Format</label>
+            <select id="pres-format">
+              <option>PowerPoint (.pptx)</option><option>PDF</option><option>Web HTML</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-cyan" onclick="generatePresentation()">Generate Presentation</button>
+        </div>
+        <div id="pres-status" class="status"></div>
+      </div>
+      <div class="card cyan">
+        <div class="card-title">Slide Outline</div>
+        <div class="output-box" id="pres-output" style="min-height:200px;">Slide-by-slide outline will appear here...</div>
+        <div class="btn-row">
+          <button class="btn btn-outline btn-sm" onclick="copyText('pres-output')">Copy Outline</button>
+          <button class="btn btn-outline btn-sm" onclick="exportPresHTML()">Export as Web HTML</button>
+          <button class="btn btn-outline btn-sm" onclick="downloadText('pres-output','presentation.txt')">Download Outline</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIE -->
+    <div class="panel" id="panel-movie">
+      <div class="card cyan">
+        <div class="card-title">🎞️ Memory Movie Generator</div>
+        <div class="input-group">
+          <label class="input-label">Movie Title</label>
+          <input type="text" id="mov-title" placeholder="e.g. Our Family Story — A Lifetime of Memories">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Story / Script (or describe what to show)</label>
+          <textarea id="mov-script" placeholder="Describe the memory movie: scenes, emotions, what happens from start to finish..."></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Music Mood</label>
+            <select id="mov-music">
+              <option>Emotional & Nostalgic</option><option>Uplifting & Joyful</option>
+              <option>Cinematic & Epic</option><option>Gentle & Peaceful</option>
+              <option>Dramatic & Powerful</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Duration</label>
+            <select id="mov-duration">
+              <option>2-3 minutes</option><option>5 minutes</option>
+              <option>10 minutes</option><option>Full Feature (30+ min)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-cyan" onclick="generateMovieScript()">Generate Movie Script & Storyboard</button>
+        </div>
+        <div id="mov-status" class="status"></div>
+      </div>
+      <div class="card cyan">
+        <div class="card-title">Movie Script & Storyboard</div>
+        <div class="output-box" id="mov-output" style="min-height:200px;">Your movie script and scene-by-scene storyboard will appear here...</div>
+        <div class="btn-row">
+          <button class="btn btn-outline btn-sm" onclick="copyText('mov-output')">Copy Script</button>
+          <button class="btn btn-outline btn-sm" onclick="downloadText('mov-output','movie-script.txt')">Download</button>
+          <button class="btn btn-outline btn-sm" onclick="sendScriptToVoice()">Send to Voice Narrator →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVATAR -->
+    <div class="panel" id="panel-avatar">
+      <div class="card cyan">
+        <div class="card-title">🗣️ Avatar Narrator</div>
+        <div class="input-group">
+          <label class="input-label">Narration Script</label>
+          <textarea id="av-script" placeholder="Enter the narration text your AI avatar will speak..."></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="input-group">
+            <label class="input-label">Avatar Persona</label>
+            <select id="av-persona">
+              <option>Professional Presenter</option><option>Warm Storyteller</option>
+              <option>Documentary Narrator</option><option>Friendly Guide</option>
+              <option>Historical Voice</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Language</label>
+            <select id="av-lang">
+              <option>English</option><option>Spanish</option><option>French</option>
+              <option>German</option><option>Hindi</option><option>Mandarin</option>
+              <option>Arabic</option><option>Portuguese</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">ElevenLabs Voice</label>
+          <select id="av-voice">
+            <option value="21m00Tcm4TlvDq8ikWAM">Rachel — Female, Warm</option>
+            <option value="pNInz6obpgDQGcFmaJgB">Adam — Male, Deep</option>
+            <option value="VR6AewLTigWG4xSOukaG">Arnold — Male, Authoritative</option>
+            <option value="EXAVITQu4vr4xnSDxMaL">Bella — Female, Soft</option>
+          </select>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-cyan" onclick="runAvatarVoice()">Generate Avatar Narration</button>
+          <button class="btn btn-outline btn-sm" onclick="translateScript()">Translate Script</button>
+        </div>
+        <div id="av-status" class="status"></div>
+      </div>
+      <div class="card cyan">
+        <div class="card-title">Narration Audio</div>
+        <div id="av-output"><p style="color:#507070;font-size:0.85rem;">Audio narration will appear here after generation.</p></div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeSettings()">✕</button>
+    <div class="modal-title">⚙ API Configuration</div>
+    <div class="modal-sub">Keys are stored in your browser only. Never shared externally.</div>
+
+    <div class="input-group">
+      <label class="input-label">🧠 Groq API Key (AI Writing, Grammar, Story)</label>
+      <input type="password" id="key-groq" placeholder="gsk_...">
+    </div>
+    <div class="input-group">
+      <label class="input-label">🔊 ElevenLabs API Key (Voice & Audio)</label>
+      <input type="password" id="key-eleven" placeholder="Your ElevenLabs key...">
+    </div>
+    <div class="input-group">
+      <label class="input-label">🎨 Hugging Face Token (Image Generation)</label>
+      <input type="password" id="key-hf" placeholder="hf_...">
+    </div>
+    <div class="input-group">
+      <label class="input-label">🔍 SerpAPI Key (Web Search)</label>
+      <input type="password" id="key-serp" placeholder="Your SerpAPI key...">
+    </div>
+    <div class="input-group">
+      <label class="input-label">📧 EmailJS Service ID</label>
+      <input type="text" id="key-emailjs-service" placeholder="service_xxxxxxx">
+    </div>
+    <div class="input-group">
+      <label class="input-label">📧 EmailJS Template ID</label>
+      <input type="text" id="key-emailjs-template" placeholder="template_xxxxxxx">
+    </div>
+    <div class="input-group">
+      <label class="input-label">📧 EmailJS Public Key</label>
+      <input type="password" id="key-emailjs-public" placeholder="Your EmailJS public key...">
+    </div>
+    <div class="input-group">
+      <label class="input-label">🎥 Runway API Key (Video Generation)</label>
+      <input type="password" id="key-runway" placeholder="Your Runway key...">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="saveSettings()">Save Keys</button>
+      <button class="btn btn-outline btn-sm" onclick="clearSettings()">Clear All</button>
+    </div>
+    <div id="settings-status" class="status"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE & KEYS
+// ============================================================
+let uploadedPhotos = [];
+let currentPanel = 'home';
+
+function getKey(k){ var d={'groq':'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','eleven':'sk_797cc00ffa5c8152e5a9effe4b096fb3dfaa8ae4bb865f53','hf':'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'}; return localStorage.getItem('omni_'+k)||d[k]||''; }; return localStorage.getItem('omni_'+k)||d[k]||''; }
+function saveSettings(){
+  const keys = ['groq','eleven','hf','serp','emailjs-service','emailjs-template','emailjs-public','runway'];
+  keys.forEach(k => {
+    const el = document.getElementById('key-'+k);
+    if(el && el.value.trim()) localStorage.setItem('omni_'+k, el.value.trim());
+  });
+  showStatus('settings-status','Keys saved securely in browser ✓','ok');
+  updateApiStatus();
+  setTimeout(closeSettings,1500);
+}
+function clearSettings(){
+  ['groq','eleven','hf','serp','emailjs-service','emailjs-template','emailjs-public','runway'].forEach(k=>localStorage.removeItem('omni_'+k));
+  showStatus('settings-status','All keys cleared','info');
+}
+function openSettings(){
+  ['groq','eleven','hf','serp','emailjs-service','emailjs-template','emailjs-public','runway'].forEach(k=>{
+    const el=document.getElementById('key-'+k);
+    const val=getKey(k);
+    if(el&&val) el.value=val;
+  });
+  document.getElementById('settings-modal').classList.add('open');
+}
+function closeSettings(){ document.getElementById('settings-modal').classList.remove('open'); }
+function updateApiStatus(){
+  const groq=getKey('groq');
+  const badge=document.getElementById('api-status');
+  if(groq){badge.textContent='✓ API Ready';badge.style.color='var(--green)';badge.style.borderColor='rgba(0,255,157,0.3)';}
+  else{badge.textContent='⚠ Configure API Keys';badge.style.color='var(--cyan)';badge.style.borderColor='rgba(0,229,255,0.3)';}
+}
+updateApiStatus();
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+const panelNames = {
+  home:'Dashboard',writing:'AI Writing Engine',grammar:'Grammar & Style Engine',
+  image:'Image Generation Engine',voice:'Voice & Audio Engine',video:'Video Generation Engine',
+  book:'Book Formatter',cover:'Cover Studio',search:'Web Search',email:'Email Engine',
+  photos:'Photo Upload Engine',memory:'Memory Story Generator',presentation:'Presentation Generator',
+  movie:'Memory Movie Generator',avatar:'Avatar Narrator'
+};
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelector(`.nav-item[onclick="showPanel('${id}')"]`).classList.add('active');
+  document.getElementById('topbar-title').textContent = panelNames[id]||id;
+  currentPanel=id;
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(el, panelId){
+  const tabs = el.parentElement.querySelectorAll('.tab');
+  const panels = el.parentElement.parentElement.querySelectorAll('.tab-panel');
+  tabs.forEach(t=>t.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function showStatus(id, msg, type){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.textContent=msg;el.className='status '+type;el.style.display='block';
+  if(type==='ok'||type==='info') setTimeout(()=>el.style.display='none',4000);
+}
+function clearOutput(id){ document.getElementById(id).textContent=''; }
+function copyText(id){
+  const el=document.getElementById(id);
+  navigator.clipboard.writeText(el.textContent||el.innerText);
+}
+function downloadText(id, filename){
+  const text=document.getElementById(id).textContent||document.getElementById(id).innerText;
+  const a=document.createElement('a');
+  a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(text);
+  a.download=filename;a.click();
+}
+
+// ============================================================
+// GROQ API CALL
+// ============================================================
+async function callGroq(systemPrompt, userPrompt, maxTokens=1500){
+  const key=getKey('groq');
+  if(!key) throw new Error('No Groq API key. Click ⚙ Settings to add your key.');
+  const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+    body:JSON.stringify({
+      model:'llama-3.3-70b-versatile',
+      max_tokens:maxTokens,
+      messages:[{role:'system',content:systemPrompt},{role:'user',content:userPrompt}]
+    })
+  });
+  if(!res.ok){const e=await res.json();throw new Error(e.error?.message||'Groq API error');}
+  const data=await res.json();
+  return data.choices[0].message.content;
+}
+
+// ============================================================
+// AI WRITING
+// ============================================================
+async function runWriting(){
+  const prompt=document.getElementById('wr-prompt').value.trim();
+  if(!prompt){showStatus('wr-status','Enter a story concept first','err');return;}
+  const genre=document.getElementById('wr-genre').value;
+  const style=document.getElementById('wr-style').value;
+  const len=document.getElementById('wr-length').value;
+  const words=len==='short'?300:len==='medium'?600:1000;
+  showStatus('wr-status','Generating your story...','info');
+  document.getElementById('wr-output').textContent='Writing...';
+  try{
+    const result=await callGroq(
+      `You are a master ${genre} novelist. Write in a ${style} style. Target ~${words} words. Write vivid, immersive, publication-quality fiction. No preamble — start the story immediately.`,
+      prompt, Math.floor(words*2)
+    );
+    document.getElementById('wr-output').textContent=result;
+    showStatus('wr-status','Story generated ✓','ok');
+  }catch(e){showStatus('wr-status',e.message,'err');document.getElementById('wr-output').textContent='';}
+}
+async function continueWriting(){
+  const existing=document.getElementById('wr-output').textContent;
+  if(!existing||existing==='Your story will appear here...'){showStatus('wr-status','Generate a story first','err');return;}
+  showStatus('wr-status','Continuing...','info');
+  try{
+    const result=await callGroq('You are a master novelist. Continue the story naturally. Match the existing style and tone exactly. No preamble.',
+      'Continue this story:\n\n'+existing.slice(-500), 800);
+    document.getElementById('wr-output').textContent=existing+'\n\n'+result;
+    showStatus('wr-status','Story continued ✓','ok');
+  }catch(e){showStatus('wr-status',e.message,'err');}
+}
+function sendToBook(){
+  const text=document.getElementById('wr-output').textContent;
+  document.getElementById('book-content').value=text;
+  showPanel('book');
+}
+
+// ============================================================
+// GRAMMAR
+// ============================================================
+async function runGrammar(mode){
+  let input='',sys='',user='';
+  if(mode==='rewrite'){
+    input=document.getElementById('gr-input').value.trim();
+    sys='You are an expert editor. Fix all grammar, spelling, punctuation. Improve clarity, flow, and style. Return only the corrected text.';
+    user=input;
+  }else if(mode==='tone'){
+    input=document.getElementById('gr-tone-input').value.trim();
+    const tone=document.getElementById('gr-tone-select').value;
+    sys=`Rewrite the text in a ${tone} tone. Preserve the meaning. Return only the rewritten text.`;
+    user=input;
+  }else if(mode==='expand'){
+    input=document.getElementById('gr-expand-input').value.trim();
+    sys='Expand this text with more detail, examples, and depth. Keep the same voice. Return only the expanded text.';
+    user=input;
+  }else if(mode==='summarize'){
+    input=document.getElementById('gr-sum-input').value.trim();
+    sys='Summarize this text concisely. Preserve the key points. Return only the summary.';
+    user=input;
+  }
+  if(!input){showStatus('gr-status','Enter some text first','err');return;}
+  showStatus('gr-status','Processing...','info');
+  document.getElementById('gr-output').textContent='Processing...';
+  try{
+    const result=await callGroq(sys,user,1500);
+    document.getElementById('gr-output').textContent=result;
+    showStatus('gr-status','Done ✓','ok');
+  }catch(e){showStatus('gr-status',e.message,'err');}
+}
+
+// ============================================================
+// IMAGE GEN (Hugging Face)
+// ============================================================
+async function runImageGen(){
+  const prompt=document.getElementById('img-prompt').value.trim();
+  if(!prompt){showStatus('img-status','Enter an image prompt first','err');return;}
+  const key=getKey('hf');
+  if(!key){showStatus('img-status','Add Hugging Face token in ⚙ Settings','err');return;}
+  const style=document.getElementById('img-style').value;
+  const neg=document.getElementById('img-negative').value;
+  const fullPrompt=`${prompt}, ${style} style, highly detailed, masterpiece quality`;
+  showStatus('img-status','Generating image... this may take 20-40 seconds','info');
+  document.getElementById('img-output').innerHTML='<div class="img-placeholder">Generating... please wait</div>';
+  try{
+    const res=await fetch('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},
+      body:JSON.stringify({inputs:fullPrompt,parameters:{negative_prompt:neg||'blurry,low quality,ugly,distorted',num_inference_steps:30}})
+    });
+    if(!res.ok){const t=await res.text();throw new Error('HF Error: '+t.slice(0,200));}
+    const blob=await res.blob();
+    const url=URL.createObjectURL(blob);
+    document.getElementById('img-output').innerHTML=`<img src="${url}" class="img-output" id="gen-img">`;
+    document.getElementById('img-dl-row').style.display='flex';
+    showStatus('img-status','Image generated ✓','ok');
+  }catch(e){
+    showStatus('img-status',e.message,'err');
+    document.getElementById('img-output').innerHTML='<div class="img-placeholder">Generation failed — check your HF token</div>';
+  }
+}
+function downloadImage(){
+  const img=document.getElementById('gen-img');
+  if(!img)return;
+  const a=document.createElement('a');a.href=img.src;a.download='omnistoria-image.png';a.click();
+}
+async function enhancePrompt(){
+  const prompt=document.getElementById('img-prompt').value.trim();
+  if(!prompt){showStatus('img-status','Enter a prompt first','err');return;}
+  showStatus('img-status','Enhancing prompt...','info');
+  try{
+    const enhanced=await callGroq('You are an expert Stable Diffusion prompt engineer. Enhance the given prompt to produce a stunning, detailed image. Return only the enhanced prompt, no explanation.',prompt,200);
+    document.getElementById('img-prompt').value=enhanced;
+    showStatus('img-status','Prompt enhanced ✓','ok');
+  }catch(e){showStatus('img-status',e.message,'err');}
+}
+
+// ============================================================
+// VOICE (ElevenLabs)
+// ============================================================
+async function runVoice(){
+  const text=document.getElementById('voice-text').value.trim();
+  if(!text){showStatus('voice-status','Enter text first','err');return;}
+  const key=getKey('eleven');
+  if(!key){showStatus('voice-status','Add ElevenLabs API key in ⚙ Settings','err');return;}
+  const voiceId=document.getElementById('voice-select').value;
+  const stability=parseFloat(document.getElementById('voice-stability').value)||0.5;
+  showStatus('voice-status','Generating voice audio...','info');
+  try{
+    const res=await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,{
+      method:'POST',
+      headers:{'xi-api-key':key,'Content-Type':'application/json','Accept':'audio/mpeg'},
+      body:JSON.stringify({text,model_id:'eleven_multilingual_v2',voice
+
